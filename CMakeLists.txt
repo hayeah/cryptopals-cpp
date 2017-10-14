@@ -24,4 +24,6 @@ target_link_libraries(s01c07 PocoFoundation crypto)
 add_executable(s01c08 s01c08.cpp)
 target_link_libraries(s01c08 PocoFoundation)
 
+add_executable(s02c01 s02c01.cpp)
+
 add_executable(segfault segfault.cpp)
