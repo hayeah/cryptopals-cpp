@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.8)
 project(set01c03)
 
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 14)
 
 set(SOURCE_FILES AESBlockCipher.h)
 
@@ -27,3 +27,4 @@ target_link_libraries(s01c08 PocoFoundation)
 add_executable(s02c01 s02c01.cpp)
 
 add_executable(segfault segfault.cpp)
+add_executable(sandbox sandbox.cpp)
