@@ -3,7 +3,7 @@ project(set01c03)
 
 set(CMAKE_CXX_STANDARD 11)
 
-set(SOURCE_FILES main.cpp)
+set(SOURCE_FILES AESBlockCipher.h)
 
 add_executable(set01c03 ${SOURCE_FILES})
 target_link_libraries(set01c03 PocoFoundation)
@@ -18,7 +18,7 @@ target_link_libraries(s01c06 PocoFoundation)
 
 link_directories(/usr/local/opt/openssl/lib)
 include_directories(/usr/local/opt/openssl/include)
-add_executable(s01c07 s01c07.cpp)
+add_executable(s01c07 ${SOURCE_FILES} s01c07.cpp)
 target_link_libraries(s01c07 PocoFoundation crypto)
 
 add_executable(s01c08 s01c08.cpp)
