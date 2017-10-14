@@ -6,7 +6,7 @@
 #include <map>
 #include <iostream>
 
-#import "utils.cpp"
+#import "utils.h"
 
 bool analyzeRepeatBlock(std::string const &str) {
     std::map<std::string, bool> m;

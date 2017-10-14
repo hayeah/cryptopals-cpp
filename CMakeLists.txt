@@ -3,10 +3,10 @@ project(set01c03)
 
 set(CMAKE_CXX_STANDARD 14)
 
-set(SOURCE_FILES AESBlockCipher.h)
+set(SOURCE_FILES utils.h AESBlockCipher.h)
 
-add_executable(set01c03 ${SOURCE_FILES})
-target_link_libraries(set01c03 PocoFoundation)
+#add_executable(set01c03 ${SOURCE_FILES})
+#target_link_libraries(set01c03 PocoFoundation)
 
 add_executable(s01c04 s01c04.cpp)
 target_link_libraries(s01c04 PocoFoundation)
@@ -25,6 +25,9 @@ add_executable(s01c08 s01c08.cpp)
 target_link_libraries(s01c08 PocoFoundation)
 
 add_executable(s02c01 s02c01.cpp)
+
+add_executable(s02c02 ${SOURCE_FILES} s02c02.cpp)
+target_link_libraries(s02c02 PocoFoundation crypto)
 
 add_executable(segfault segfault.cpp)
 add_executable(sandbox sandbox.cpp)

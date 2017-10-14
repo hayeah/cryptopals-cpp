@@ -2,11 +2,43 @@
 // Created by Howard Yeh on 2017-10-13.
 //
 
+#pragma once
+
 #include <string>
 #include <fstream>
 #include <Poco/Base64Decoder.h>
 #include <Poco/HexBinaryDecoder.h>
 #include <sstream>
+#include <Poco/HexBinaryEncoder.h>
+
+std::string xorstr(std::string const &input, std::string const &key) {
+    std::string output;
+    output.resize(input.length());
+
+    for (int i = 0; i < input.length(); i++) {
+        output[i] = input[i] ^ key[i % key.length()];
+    }
+
+    return output;
+}
+
+void padstr(std::string &str, char paddingByte, size_t blockSize) {
+    std::string out;
+
+    if (str.length() > blockSize) {
+        throw "string cannot be longer than block size";
+    }
+
+    if (str.length() == blockSize) {
+        return;
+    }
+
+    auto padN = blockSize - str.length();
+
+    for (size_t i = 0; i < padN; i++) {
+        str.push_back(paddingByte);
+    }
+}
 
 std::string hexdecode(std::string const &str) {
     std::string out;
@@ -19,6 +51,17 @@ std::string hexdecode(std::string const &str) {
     }
 
     return out;
+}
+
+std::string hexencode(std::string const &str) {
+    std::string out;
+    std::ostringstream ss(out);
+    Poco::HexBinaryEncoder encoder(ss);
+
+    encoder << str;
+    encoder.close();
+
+    return ss.str();
 }
 
 std::string decodeBase64(std::string const &b64s) {

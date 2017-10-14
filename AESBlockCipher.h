@@ -16,12 +16,12 @@ public:
         AES_set_encrypt_key((const unsigned char *) key.c_str(), 16 * 8, &this->encryptKey);
     }
 
-    std::string decryptBlock(std::string::iterator it) {
+    std::string decryptBlock(std::string::iterator it) const {
         AES_ecb_encrypt((const unsigned char *) it.base(), (unsigned char *) buf.c_str(), &this->decryptKey, AES_DECRYPT);
         return buf;
     }
 
-    std::string encryptBlock(std::string::iterator it) {
+    std::string encryptBlock(std::string::iterator it) const {
         AES_ecb_encrypt((const unsigned char *) it.base(), (unsigned char *) buf.c_str(), &this->encryptKey, AES_ENCRYPT);
         return buf;
     }
