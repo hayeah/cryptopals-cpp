@@ -11,6 +11,25 @@
 #include <sstream>
 #include <Poco/HexBinaryEncoder.h>
 
+std::string
+padstr(std::string const &str, char padchar, unsigned int mod) {
+    auto olen = str.length();
+    if (olen % mod == 0) {
+        return str;
+    }
+
+    std::string out = str;
+
+    auto padn = mod - olen % mod;
+    out.resize(olen + padn);
+
+    for (size_t i = 0; i < padn; i++) {
+        out[olen + i] = padchar;
+    }
+
+    return out;
+}
+
 std::string xorstr(std::string const &input, std::string const &key) {
     std::string output;
     output.resize(input.length());
