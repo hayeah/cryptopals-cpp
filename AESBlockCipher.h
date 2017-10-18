@@ -29,7 +29,7 @@ public:
         return buf;
     }
 
-    std::string encryptECB(std::string const &ptext) {
+    std::string encryptECB(std::string const &ptext) const {
         if (ptext.length() % 16 != 0) {
             throw "AES ECB plain text must be blocks of 16 bytes";
         }
@@ -42,7 +42,7 @@ public:
         return out;
     }
 
-    std::string decryptECB(std::string const &ctext) {
+    std::string decryptECB(std::string const &ctext) const {
         if (ctext.length() % 16 != 0) {
             throw "AES ECB cipher text must be blocks of 16 bytes";
         }

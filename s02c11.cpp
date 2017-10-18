@@ -11,16 +11,6 @@
 #include "utils.h"
 #include "AESBlockCipher.h"
 
-std::string randstr(size_t n) {
-    // take advantage of buffering
-    static std::fstream rf("/dev/urandom");
-
-    std::string out;
-    out.resize(n);
-    rf.get(std::begin(out).base(), n);
-    return out;
-}
-
 std::string rand_encode(std::string const &ptext) {
 
     auto padbefore = rand() % 5 + 5;

@@ -12,6 +12,17 @@
 #include <Poco/HexBinaryEncoder.h>
 
 std::string
+randstr(size_t n) {
+    // take advantage of buffering
+    static std::fstream rf("/dev/urandom");
+
+    std::string out;
+    out.resize(n);
+    rf.get(std::begin(out).base(), n);
+    return out;
+}
+
+std::string
 padstr(std::string const &str, char padchar, unsigned int mod) {
     auto olen = str.length();
     if (olen % mod == 0) {
@@ -41,23 +52,23 @@ std::string xorstr(std::string const &input, std::string const &key) {
     return output;
 }
 
-void padstr(std::string &str, char paddingByte, size_t blockSize) {
-    std::string out;
-
-    if (str.length() > blockSize) {
-        throw "string cannot be longer than block size";
-    }
-
-    if (str.length() == blockSize) {
-        return;
-    }
-
-    auto padN = blockSize - str.length();
-
-    for (size_t i = 0; i < padN; i++) {
-        str.push_back(paddingByte);
-    }
-}
+//void padstr(std::string &str, char paddingByte, size_t blockSize) {
+//    std::string out;
+//
+//    if (str.length() > blockSize) {
+//        throw "string cannot be longer than block size";
+//    }
+//
+//    if (str.length() == blockSize) {
+//        return;
+//    }
+//
+//    auto padN = blockSize - str.length();
+//
+//    for (size_t i = 0; i < padN; i++) {
+//        str.push_back(paddingByte);
+//    }
+//}
 
 std::string hexdecode(std::string const &str) {
     std::string out;
