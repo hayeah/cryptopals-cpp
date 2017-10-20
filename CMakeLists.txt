@@ -35,5 +35,8 @@ target_link_libraries(s02c11 PocoFoundation crypto tcmalloc)
 add_executable(s02c12 ${SOURCE_FILES} s02c12.cpp)
 target_link_libraries(s02c12 PocoFoundation crypto tcmalloc)
 
+add_executable(s02c13 ${SOURCE_FILES} s02c13.cpp)
+target_link_libraries(s02c13 PocoFoundation crypto tcmalloc)
+
 add_executable(segfault segfault.cpp)
 add_executable(sandbox sandbox.cpp)

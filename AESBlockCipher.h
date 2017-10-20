@@ -3,6 +3,7 @@
 //
 #pragma once
 
+#include "utils.h"
 #include "openssl/aes.h"
 
 class AESBlockCipher {

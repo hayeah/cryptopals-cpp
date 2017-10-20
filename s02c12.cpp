@@ -21,37 +21,6 @@ std::string encoderWithRandPadding(std::string const &ptext) {
     return cipher.encryptECB(text);
 }
 
-bool hasRepeatBlock(std::string ctext, size_t bsize) {
-    std::map<std::string, bool> m;
-
-    for (auto it = std::begin(ctext); it + bsize < std::end(ctext); it += bsize) {
-        auto block = std::string(it, it + bsize);
-        if (m[block]) {
-            return true;
-        }
-
-        m[block] = true;
-    }
-
-    return false;
-}
-
-// returns block size. 0 if cannot find a block size.
-int detectBlocksize(std::function<std::string(std::string)> crypt) {
-
-    for (size_t bsize = 2; bsize < 1024; bsize++) {
-        // assuming that left and right paddings are less than block size, genearting 3 blocks will gurantee that the same
-        // bytes straddle 2 blocks. Then we detect repeat.
-        auto s = std::string(bsize * 3, '0');
-        auto ctext = crypt(s);
-        if (hasRepeatBlock(ctext, bsize)) {
-            return bsize;
-        }
-    }
-
-    return 0;
-}
-
 
 class Oracle {
 public:
