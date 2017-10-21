@@ -2,8 +2,10 @@ cmake_minimum_required(VERSION 3.8)
 project(set01c03)
 
 set(CMAKE_CXX_STANDARD 14)
-
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -Wl -nopie")
 set(SOURCE_FILES utils.h AESBlockCipher.h)
+#list(APPEND LDFLAGS -Wl,-no_pie)
+set(CMAKE_EXE_LINKER_FLAGS -Wl,-no_pie)
 
 #add_executable(set01c03 ${SOURCE_FILES})
 #target_link_libraries(set01c03 PocoFoundation)
@@ -37,6 +39,9 @@ target_link_libraries(s02c12 PocoFoundation crypto tcmalloc)
 
 add_executable(s02c13 ${SOURCE_FILES} s02c13.cpp)
 target_link_libraries(s02c13 PocoFoundation crypto tcmalloc)
+
+add_executable(s02c14 ${SOURCE_FILES} s02c14.cpp)
+target_link_libraries(s02c14 PocoFoundation crypto tcmalloc profiler)
 
 add_executable(segfault segfault.cpp)
 add_executable(sandbox sandbox.cpp)

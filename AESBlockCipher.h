@@ -19,13 +19,13 @@ public:
     }
 
     std::string decryptBlock(std::string::const_iterator it) const {
-        AES_ecb_encrypt((const unsigned char *) it.base(), (unsigned char *) buf.c_str(), &this->decryptKey,
+        AES_ecb_encrypt((const unsigned char *) it.base(), (unsigned char *) buf.c_str(), &decryptKey,
                         AES_DECRYPT);
         return buf;
     }
 
     std::string encryptBlock(std::string::const_iterator it) const {
-        AES_ecb_encrypt((const unsigned char *) it.base(), (unsigned char *) buf.c_str(), &this->encryptKey,
+        AES_ecb_encrypt((const unsigned char *) it.base(), (unsigned char *) buf.c_str(), &encryptKey,
                         AES_ENCRYPT);
         return buf;
     }
@@ -37,7 +37,7 @@ public:
 
         std::string out;
         for (auto it = std::begin(ptext); it < std::end(ptext); it += 16) {
-            out += this->encryptBlock(it);
+            out += encryptBlock(it);
         }
 
         return out;
@@ -50,7 +50,7 @@ public:
 
         std::string out;
         for (auto it = std::begin(ctext); it < std::end(ctext); it += 16) {
-            out += this->decryptBlock(it);
+            out += decryptBlock(it);
         }
 
         return out;
@@ -70,7 +70,7 @@ public:
 
         for (auto it = std::begin(ptext); it < std::end(ptext); it += 16) {
             auto block = xorstr(std::string(it, it + 16), ctext_prev);
-            ctext_prev = this->encryptBlock(std::begin(block));
+            ctext_prev = encryptBlock(std::begin(block));
             out += ctext_prev;
         }
 
@@ -93,7 +93,7 @@ public:
         for (auto it = std::begin(ctext); it < std::end(ctext); it += 16) {
             auto ctext = std::string(it, it + 16);
 
-            auto block = this->decryptBlock(std::begin(ctext));
+            auto block = decryptBlock(std::begin(ctext));
             out += xorstr(block, ctext_prev);
             ctext_prev = ctext;
         }
