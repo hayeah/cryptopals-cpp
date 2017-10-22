@@ -15,11 +15,25 @@
 std::string
 randstr(size_t n) {
     // take advantage of buffering
-    static std::fstream rf("/dev/urandom");
+    auto rf = std::ifstream("/dev/urandom", std::ios::in | std::ios::binary);
 
     std::string out;
     out.resize(n);
-    rf.get(std::begin(out).base(), n);
+
+    rf.read((char *) out.c_str(), n);
+
+//    out.c_str()
+//    rf.get(out.c_str(), n);
+
+//    rf.get(std::begin(out).base(), n);
+
+//    if (rf.bad()) {
+//        throw "failed to read randstr";
+//    }
+
+//    if (rf.badbit) {
+//        throw "failed to read randstr";
+//    }
     return out;
 }
 
@@ -46,7 +60,7 @@ std::string xorstr(std::string const &input, std::string const &key) {
     std::string output;
     output.resize(input.length());
 
-    for (int i = 0; i < input.length(); i++) {
+    for (size_t i = 0; i < input.length(); i++) {
         output[i] = input[i] ^ key[i % key.length()];
     }
 

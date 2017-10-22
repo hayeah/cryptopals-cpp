@@ -1,8 +1,16 @@
 cmake_minimum_required(VERSION 3.8)
 project(set01c03)
 
+if(NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE Debug)
+endif()
+
+set(CMAKE_CXX_FLAGS "-Wall -Wextra")
+#set(CMAKE_CXX_FLAGS_DEBUG "-g")
+set(CMAKE_CXX_FLAGS_RELEASE "-O3")
+
 set(CMAKE_CXX_STANDARD 14)
-#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -Wl -nopie")
+
 set(SOURCE_FILES utils.h AESBlockCipher.h)
 #list(APPEND LDFLAGS -Wl,-no_pie)
 set(CMAKE_EXE_LINKER_FLAGS -Wl,-no_pie)
@@ -41,7 +49,8 @@ add_executable(s02c13 ${SOURCE_FILES} s02c13.cpp)
 target_link_libraries(s02c13 PocoFoundation crypto tcmalloc)
 
 add_executable(s02c14 ${SOURCE_FILES} s02c14.cpp)
-target_link_libraries(s02c14 PocoFoundation crypto tcmalloc profiler)
+# target_link_libraries(s02c14 PocoFoundation crypto tcmalloc profiler)
+target_link_libraries(s02c14 PocoFoundation crypto)
 
 add_executable(segfault segfault.cpp)
 add_executable(sandbox sandbox.cpp)

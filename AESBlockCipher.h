@@ -10,7 +10,7 @@ class AESBlockCipher {
 public:
     std::string key;
 
-    AESBlockCipher(std::string key) {
+    AESBlockCipher(std::string const &key) {
         this->key = key;
         this->buf.resize(16);
 
@@ -36,6 +36,7 @@ public:
         }
 
         std::string out;
+        out.reserve(ptext.length());
         for (auto it = std::begin(ptext); it < std::end(ptext); it += 16) {
             out += encryptBlock(it);
         }
