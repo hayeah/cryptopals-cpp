@@ -149,9 +149,7 @@ int main() {
 
     std::cout << "ctext:\n" << hexencode(ctext) << std::endl;
     std::cout << "bsize:\n" << bsize << std::endl;
-
-
-
+    
     auto secret = recoverSecret(oracle, bsize);
 
     std::cout << "secret:\n" << secret << std::endl;

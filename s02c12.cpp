@@ -89,20 +89,26 @@ int main() {
 
     auto key = randstr(16);
     auto cipher = AESBlockCipher(key);
-
+//
     auto oracle = Oracle(key, unknownStr);
+//
+//
+//    std::string myprefix = "hello ecb";
+//
+//    auto ctext = oracle.encrypt(myprefix);
+//
+////    auto ctext = encoderWithRandPadding(myprefix + unknownStr);
+//
+//    auto bsize = detectBlocksize(encoderWithRandPadding);
+//
+//    std::cout << "ctext:\n" << hexencode(ctext) << std::endl;
+//    std::cout << "bsize:\n" << bsize << std::endl;
 
+    auto bsize = size_t { 16 };
 
-    std::string myprefix = "hello ecb";
-
-    auto ctext = oracle.encrypt(myprefix);
-
-//    auto ctext = encoderWithRandPadding(myprefix + unknownStr);
-
-    auto bsize = detectBlocksize(encoderWithRandPadding);
-
-    std::cout << "ctext:\n" << hexencode(ctext) << std::endl;
-    std::cout << "bsize:\n" << bsize << std::endl;
+    for (int i = 0; i < 100; i++) {
+        recoverSecret(oracle, bsize);
+    }
 
     auto secret = recoverSecret(oracle, bsize);
     std::cout << "secret:\n" << secret << std::endl;
